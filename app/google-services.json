@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "643372459421",
+    "project_id": "chatbro-e8526",
+    "storage_bucket": "chatbro-e8526.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:643372459421:android:f1862b62d2ed93293e3b74",
+        "android_client_info": {
+          "package_name": "com.example.chatbro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "643372459421-74vvinaa13v8trqp94cbhm2t2sveh4cu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBI5VfO42iDvxCz5q7Jh0tBk91Erqzzang"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "643372459421-74vvinaa13v8trqp94cbhm2t2sveh4cu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
