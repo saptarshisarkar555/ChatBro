@@ -1,7 +1,6 @@
 package com.example.chatbro.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -46,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         loadUserDetails();
         getToken();
         setListeners();
+        listenConversation();
     }
 
     private void init(){
@@ -72,6 +72,15 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
 
+    private void listenConversation(){
+        database.collection(Constants.KEY_COLLECTION_CONVERSATIONS)
+                .whereEqualTo(Constants.KEY_SENDER_ID,preferenceManager.getString(Constants.KRY_USER_ID))
+                .addSnapshotListener(eventListener);
+        database.collection(Constants.KEY_COLLECTION_CONVERSATIONS)
+                .whereEqualTo(Constants.KEY_RECEIVER_ID,preferenceManager.getString(Constants.KRY_USER_ID))
+                .addSnapshotListener(eventListener);
+    }
+
     private final EventListener<QuerySnapshot> eventListener = (value, error) ->{
       if (error !=null){
           return;
@@ -96,18 +105,16 @@ public class MainActivity extends AppCompatActivity {
                   chatMessage.message = documentChange.getDocument().getString(Constants.KEY_LAST_MESSAGE);
                   chatMessage.dateObject = documentChange.getDocument().getDate(Constants.KEY_TIMESTAMP);
                   conversations.add(chatMessage);
-              } else if (documentChange.getType() ==DocumentChange.Type.MODIFIED){
-                  {
+              }else if (documentChange.getType() ==DocumentChange.Type.MODIFIED) {
                       for (int i = 0; i<conversations.size();i++){
-                          String sernderId = documentChange.getDocument().getString(Constants.KEY_SENDER_ID);
+                          String senderId = documentChange.getDocument().getString(Constants.KEY_SENDER_ID);
                           String receiverId = documentChange.getDocument().getString(Constants.KEY_RECEIVER_ID);
-                          if(conversations.get(i).senderId.equals(sernderId) && conversations.get(i).receiverId.equals(receiverId)){
+                          if(conversations.get(i).senderId.equals(senderId) && conversations.get(i).receiverId.equals(receiverId)){
                               conversations.get(i).message = documentChange.getDocument().getString(Constants.KEY_LAST_MESSAGE);
                               conversations.get(i).dateObject = documentChange.getDocument().getDate(Constants.KEY_TIMESTAMP);
                               break;
                           }
                       }
-                  }
               }
           }
           Collections.sort(conversations, (obj1, obj2)-> obj2.dateObject.compareTo(obj1.dateObject));
