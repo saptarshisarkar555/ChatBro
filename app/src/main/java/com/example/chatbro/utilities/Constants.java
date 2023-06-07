@@ -1,5 +1,7 @@
 package com.example.chatbro.utilities;
 
+import java.util.HashMap;
+
 public class Constants {
     public static final String KEY_COLLECTION_USERS = "users";
     public static final String KEY_NAME = "name";
@@ -24,6 +26,26 @@ public class Constants {
     public static final String KEY_RECEIVER_IMAGE = "receiverImage";
     public static final String KEY_LAST_MESSAGE = "lastMessage";
     public static final String KEY_AVAILABILITY = "availabilty";
+    public static final String REMOTE_MSG_AUTHORIZATION = "Authorization";
+    public static final String REMOTE_MSG_CONTENT_TYPE = "Content-Type";
+    public static final String REMOTE_MSG_DATA = "data";
+    public static final String REMOTE_MSG_REGISTRATION_IDS = "registration_ids";
+
+    public static HashMap<String, String> remoteMsgHeaders = null;
+    public static HashMap<String, String> getRemoteMsgHeaders(){
+        if (remoteMsgHeaders == null){
+            remoteMsgHeaders = new HashMap<>();
+            remoteMsgHeaders.put(
+              REMOTE_MSG_AUTHORIZATION,
+                    "key=AAAAlcv8pZ0:APA91bEmBPk6iJdc3bKtsLXSFKMHs2DAlTWX0_uL9_3WgE1n-lRnDlKdB7LsjMaP30x8mHQcWPfX2dMAnzpyglkeU6-v4ydNfDxncB4e_iZagwKPIluBmXV5LHoFJzpdr-qMTqQ-eY6U"
+            );
+            remoteMsgHeaders.put(
+              REMOTE_MSG_CONTENT_TYPE,
+                    "application/json"
+            );
+        }
+        return remoteMsgHeaders;
+    }
 
 
 }
